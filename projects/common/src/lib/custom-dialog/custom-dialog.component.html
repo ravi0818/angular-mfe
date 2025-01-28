@@ -1,0 +1,15 @@
+@if(showHeader()){
+<h2 mat-dialog-title>{{ title() }}</h2>
+}
+<mat-dialog-content>
+  <ng-container
+    *ngTemplateOutlet="body(); context: { $implicit: data() }"
+  ></ng-container>
+</mat-dialog-content>
+
+@if (showFooter()) {
+<mat-dialog-actions>
+  <button mat-button (click)="onCloseClick()">Close</button>
+  <button mat-button (click)="onDoneClick()" cdkFocusInitial>Done</button>
+</mat-dialog-actions>
+}
