@@ -1,0 +1,39 @@
+<mat-card
+  class="flex flex-col justify-between shadow-lg mb-4 rounded-lg border border-gray-200 h-[14rem]"
+>
+  <mat-card-header
+    class="flex justify-between items-center border-b border-gray-300 pb-2 mb-4"
+  >
+    <mat-card-title
+      class="text-xl font-semibold w-[12rem] truncate"
+      [class.line-through]="todo().completed"
+    >
+      {{ todo().title }}
+    </mat-card-title>
+    <mat-checkbox
+      [checked]="todo().completed"
+      (change)="onToggle.emit(todo())"
+      class="text-blue-500"
+    ></mat-checkbox>
+  </mat-card-header>
+
+  <mat-card-content class="h-full">
+    <p class="text-gray-700 mb-2">
+      {{ todo().description }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions class="flex justify-between items-center">
+    <div class="text-gray-700 mb-2">
+      {{ todo().dueDate | date : "fullDate" }}
+    </div>
+    <div>
+      <button mat-button color="primary" (click)="onEditClick.emit(todo())">
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="onDelete.emit(todo().id ?? '')">
+        Delete
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

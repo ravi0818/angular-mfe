@@ -1,0 +1,94 @@
+<div class="">
+  <div class="flex justify-between pb-4">
+    <h3 class="text-2xl font-bold">Todos</h3>
+    <button mat-flat-button (click)="openAddDialog()">+ Add Todo</button>
+  </div>
+  <div class="grid lg:grid-cols-3 gap-4 overflow-y-auto h-[75vh]">
+    @for (todo of todos(); track $index) {
+    <app-todo-item
+      [todo]="todo"
+      (onEditClick)="openEditDialog($event)"
+      (onDelete)="deleteTodo($event)"
+      (onToggle)="toggleTodo($event)"
+    />
+    }
+  </div>
+
+  <ng-template #todoFormTemplate let-data>
+    <div class="flex flex-col">
+      <div class="text-xl font-bold pb-4 text-center">
+        @if(isEditingMode()){ Edit Todo }@else { Add Todo }
+      </div>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [formControl]="title" maxlength="20" />
+        @if(this.title.hasError('required')){
+        <mat-error>{{ requiredError }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [formControl]="description"
+          maxlength="100"
+        ></textarea>
+        @if(this.description.hasError('required')){
+        <mat-error>{{ requiredError }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Due date</mat-label>
+        <input matInput [matDatepicker]="datepicker" [formControl]="dueDate" />
+        <mat-datepicker #datepicker />
+        <mat-datepicker-toggle [for]="datepicker" matSuffix />
+        @if(this.dueDate.hasError('required')){
+        <mat-error>{{ requiredError }}</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- <mat-form-field>
+        <mat-label>Due time</mat-label>
+        <input matInput [matTimepicker]="timepicker" [formControl]="dueTime" />
+        <mat-timepicker #timepicker />
+        <mat-timepicker-toggle [for]="timepicker" matSuffix />
+        @if(this.dueTime.hasError('required')){
+        <mat-error>{{ requiredError }}</mat-error>
+        }
+      </mat-form-field> -->
+
+      <!-- <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          [formControl]="email"
+          required
+        />
+        @if (this.email.hasError('required')) {
+        <mat-error>{{ requiredError }}</mat-error>
+        }@else if(this.email.hasError('email')){
+        <mat-error>{{ emailError }}</mat-error>
+        }
+      </mat-form-field> -->
+
+      @if(isEditingMode()){
+      <button
+        mat-flat-button
+        (click)="updateTodoItem(data.id)"
+        [disabled]="!validateForm()"
+      >
+        Update
+      </button>
+      }@else {
+      <button
+        mat-flat-button
+        (click)="addTodoItem()"
+        [disabled]="!validateForm()"
+      >
+        Add
+      </button>
+      }
+    </div>
+  </ng-template>
+</div>
