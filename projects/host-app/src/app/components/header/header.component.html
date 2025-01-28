@@ -1,0 +1,127 @@
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <button class="p-2">
+          <mat-icon
+            class="text-white"
+            [fontIcon]="isMenuOpen() ? 'close' : 'menu'"
+            (click)="toggleMenu()"
+          ></mat-icon>
+        </button>
+      </div>
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+      >
+        <div class="flex shrink-0 items-center">
+          <h3
+            routerLink="/"
+            class="text-lg font-bold cursor-pointer text-white"
+          >
+            Angular Demo
+          </h3>
+        </div>
+        <div class="hidden sm:ml-6 sm:block w-full">
+          <div class="flex space-x-4 w-full justify-end">
+            <a
+              routerLink="/"
+              class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
+              [class]="
+                currentRoute() === '/'
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              "
+              >Dashboard</a
+            >
+            <a
+              routerLink="/todos"
+              class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
+              [class]="
+                currentRoute() === '/todos'
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              "
+              >Todos</a
+            >
+            <a
+              routerLink="/games"
+              class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
+              [class]="
+                currentRoute() === '/games'
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              "
+              >Games</a
+            >
+            <a
+              routerLink="/cart"
+              class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
+              [class]="
+                currentRoute() === '/cart'
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              "
+            >
+              <mat-icon
+                [matBadge]="cartItems().length"
+                matBadgeOverlap="false"
+                fontIcon="shopping_cart"
+              ></mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" [class]="isMenuOpen() ? 'block' : 'hidden'">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+      <a
+        routerLink="/"
+        class="block rounded-md px-3 py-2 text-base font-medium"
+        [class]="
+          currentRoute() === '/'
+            ? 'bg-gray-900 text-white'
+            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+        "
+        >Dashboard</a
+      >
+      <a
+        routerLink="/todos"
+        class="block rounded-md px-3 py-2 text-base font-medium"
+        [class]="
+          currentRoute() === '/todos'
+            ? 'bg-gray-900 text-white'
+            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+        "
+        >Todos</a
+      >
+      <a
+        routerLink="/games"
+        class="block rounded-md px-3 py-2 text-base font-medium"
+        [class]="
+          currentRoute() === '/games'
+            ? 'bg-gray-900 text-white'
+            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+        "
+        >Games</a
+      >
+      <a
+        routerLink="/cart"
+        class="block rounded-md px-3 py-2 text-base font-medium"
+        [class]="
+          currentRoute() === '/cart'
+            ? 'bg-gray-900 text-white'
+            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+        "
+      >
+        <mat-icon
+          [matBadge]="cartItems().length"
+          matBadgeOverlap="false"
+          fontIcon="shopping_cart"
+        ></mat-icon>
+      </a>
+    </div>
+  </div>
+</nav>

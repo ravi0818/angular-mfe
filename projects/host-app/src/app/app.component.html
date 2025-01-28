@@ -1,9 +1,6 @@
-<h1>{{ title }}</h1>
-
-<a routerLink="/">Dashboard</a> &nbsp; &nbsp;
-<a routerLink="/todos">Todos</a>
-
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
-<button mat-flat-button>Basic</button>
-
-<router-outlet></router-outlet>
+<main class="main">
+  <app-header></app-header>
+  <div class="h-[calc(100vh-4rem)] px-4 sm:px-[4rem] md:px-[7rem] py-[1rem]">
+    <router-outlet />
+  </div>
+</main>
