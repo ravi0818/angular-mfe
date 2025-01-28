@@ -3,7 +3,7 @@
     <h3 class="text-2xl font-bold">Todos</h3>
     <button mat-flat-button (click)="openAddDialog()">+ Add Todo</button>
   </div>
-  <div class="grid lg:grid-cols-3 gap-4 overflow-y-auto h-[75vh]">
+  <div class="grid lg:grid-cols-3 gap-4">
     @for (todo of todos(); track $index) {
     <app-todo-item
       [todo]="todo"
@@ -46,31 +46,6 @@
         <mat-error>{{ requiredError }}</mat-error>
         }
       </mat-form-field>
-
-      <!-- <mat-form-field>
-        <mat-label>Due time</mat-label>
-        <input matInput [matTimepicker]="timepicker" [formControl]="dueTime" />
-        <mat-timepicker #timepicker />
-        <mat-timepicker-toggle [for]="timepicker" matSuffix />
-        @if(this.dueTime.hasError('required')){
-        <mat-error>{{ requiredError }}</mat-error>
-        }
-      </mat-form-field> -->
-
-      <!-- <mat-form-field>
-        <mat-label>Enter your email</mat-label>
-        <input
-          matInput
-          placeholder="pat@example.com"
-          [formControl]="email"
-          required
-        />
-        @if (this.email.hasError('required')) {
-        <mat-error>{{ requiredError }}</mat-error>
-        }@else if(this.email.hasError('email')){
-        <mat-error>{{ emailError }}</mat-error>
-        }
-      </mat-form-field> -->
 
       @if(isEditingMode()){
       <button
