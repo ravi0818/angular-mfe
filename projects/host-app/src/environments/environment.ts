@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  remoteEntry:
-    'http://ec2-35-154-204-216.ap-south-1.compute.amazonaws.com:4201/remoteEntry.js',
+  mfes: {
+    todosApp: 'http://ravikp-todos-app.s3-website.ap-south-1.amazonaws.com',
+  },
 };

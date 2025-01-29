@@ -1,4 +1,6 @@
 export const environment = {
   production: false,
-  remoteEntry: 'http://localhost:4201/remoteEntry.js',
+  mfes: {
+    todosApp: 'http://localhost:4201',
+  },
 };

@@ -13,7 +13,7 @@ export const routes: Routes = [
     loadComponent: () =>
       loadRemoteModule({
         type: 'module',
-        remoteEntry: environment.remoteEntry,
+        remoteEntry: `${environment.mfes?.todosApp}/remoteEntry.js`,
         exposedModule: './Component',
       }).then((m) => m.AppComponent),
   },
