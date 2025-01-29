@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "build:common": "ng build common",
+    "build:host-app": "ng build host-app",
+    "build:todos-app": "ng build todos-app",
+    "start:host-app": "ng serve host-app",
+    "start:todos-app": "ng serve todos-app",
+    "start-prod:host-app": "ng serve host-app --configuration production --host 0.0.0.0 --disable-host-check",
+    "start-prod:todos-app": "ng serve todos-app --configuration production --host 0.0.0.0 --disable-host-check",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
