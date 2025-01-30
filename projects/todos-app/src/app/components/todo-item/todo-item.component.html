@@ -25,7 +25,7 @@
 
   <mat-card-actions class="flex justify-between items-center">
     <div class="text-gray-700">
-      {{ todo().dueDate | date : "fullDate" }}
+      {{ todo().dueDate | date : "mediumDate" }}
     </div>
     <div>
       <button mat-button color="primary" (click)="onEditClick.emit(todo())">
