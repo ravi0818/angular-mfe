@@ -2,27 +2,39 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
+import { getCartValue, IProduct } from 'common';
+import { Store } from '@ngrx/store';
+import { AsyncPipe } from '@angular/common';
 // import { ProductsService } from '@services/products.service';
 
 @Component({
   selector: 'app-header',
-  imports: [MatButtonModule, RouterLink, MatBadgeModule, MatIconModule],
+  imports: [
+    MatButtonModule,
+    RouterLink,
+    MatBadgeModule,
+    MatIconModule,
+    AsyncPipe,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private routerSubscription!: Subscription;
-  // productsService = inject(ProductsService);
   router = inject(Router);
-  // cartItems = computed(() => this.productsService.cart());
-  cartItems = signal([]);
+  store = inject(Store);
+  cart$: Observable<IProduct[]>;
+  cartCount$: Observable<number>;
   currentRoute = signal(this.router.url);
   isMenuOpen = signal(false);
 
-  constructor() {}
+  constructor() {
+    this.cart$ = this.store.select(getCartValue);
+    this.cartCount$ = this.cart$.pipe(map((cart) => cart.length));
+  }
 
   ngOnInit(): void {
     this.routerSubscription = this.router.events.subscribe((event) => {

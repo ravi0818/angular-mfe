@@ -62,9 +62,9 @@
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               "
               >Games</a
-            >
+            >-->
+            <!-- routerLink="/cart" -->
             <a
-              routerLink="/cart"
               class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
               [class]="
                 currentRoute() === '/cart'
@@ -73,11 +73,11 @@
               "
             >
               <mat-icon
-                [matBadge]="cartItems().length"
+                [matBadge]="cartCount$ | async"
                 matBadgeOverlap="false"
                 fontIcon="shopping_cart"
               ></mat-icon>
-            </a> -->
+            </a>
           </div>
         </div>
       </div>
@@ -126,9 +126,9 @@
             : 'text-gray-300 hover:bg-gray-700 hover:text-white'
         "
         >Games</a
-      >
+      >-->
+      <!-- routerLink="/cart" -->
       <a
-        routerLink="/cart"
         class="block rounded-md px-3 py-2 text-base font-medium"
         [class]="
           currentRoute() === '/cart'
@@ -137,11 +137,11 @@
         "
       >
         <mat-icon
-          [matBadge]="cartItems().length"
+          [matBadge]="cartCount$ | async"
           matBadgeOverlap="false"
           fontIcon="shopping_cart"
         ></mat-icon>
-      </a> -->
+      </a>
     </div>
   </div>
 </nav>
