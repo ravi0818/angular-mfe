@@ -17,4 +17,13 @@ export const routes: Routes = [
         exposedModule: './Component',
       }).then((m) => m.AppComponent),
   },
+  {
+    path: 'shopping',
+    loadComponent: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: `${environment.mfes?.shoppingApp}/remoteEntry.js`,
+        exposedModule: './Component',
+      }).then((m) => m.AppComponent),
+  },
 ];
