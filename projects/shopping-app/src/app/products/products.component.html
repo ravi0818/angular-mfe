@@ -1,0 +1,16 @@
+<div class="h-[100%]">
+  <app-table
+    [columns]="columns"
+    [tableData]="products"
+    [isLoading]="isLoading()"
+    [customCellTemplates]="customTemplates"
+  ></app-table>
+
+  <ng-template #actionTemplate let-row>
+    <button mat-button (click)="handleBuy(row)">+Cart</button>
+  </ng-template>
+
+  <ng-template #imageTemplate let-row>
+    <img [src]="row.image" height="50" width="50" style="padding: 8px" />
+  </ng-template>
+</div>
