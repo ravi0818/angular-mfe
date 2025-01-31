@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   mfes: {
-    todosApp: 'http://ravikp-todos-app.s3-website.ap-south-1.amazonaws.com',
-    shoppingApp: 'http://localhost:4202',
+    todosApp: 'https://ravikp-todos-app.s3.ap-south-1.amazonaws.com',
+    shoppingApp: 'https://ravikp-shopping-app.s3.ap-south-1.amazonaws.com',
   },
 };
