@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <button class="p-2">
+        <button class="p-2" [attr.aria-label]="isMenuOpen() ? 'close' : 'menu'">
           <mat-icon
             class="text-white"
             [fontIcon]="isMenuOpen() ? 'close' : 'menu'"

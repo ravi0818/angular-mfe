@@ -11,6 +11,12 @@
   </ng-template>
 
   <ng-template #imageTemplate let-row>
-    <img [src]="row.image" height="50" width="50" style="padding: 8px" />
+    <img
+      [alt]="row.title"
+      [src]="row.image"
+      height="50"
+      width="50"
+      style="padding: 8px"
+    />
   </ng-template>
 </div>
