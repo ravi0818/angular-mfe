@@ -18,6 +18,7 @@
     "start-prod:shopping-app": "ng serve shopping-app --configuration production --host 0.0.0.0 --disable-host-check",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:coverage": "ng test --no-watch --code-coverage",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
