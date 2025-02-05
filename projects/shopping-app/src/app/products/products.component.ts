@@ -50,6 +50,7 @@ export class ProductsComponent {
 
   constructor() {
     this.cart$ = this.store.select(getCartValue);
+    console.log('inside constructor');
   }
 
   ngOnInit() {
@@ -86,7 +87,7 @@ export class ProductsComponent {
   handleBuy(product: IProduct) {
     this.cart$.pipe(take(1)).subscribe((cart) => {
       const isDuplicate = cart.some((item) => item.id === product.id);
-
+      console.log({ cart, isDuplicate });
       if (isDuplicate) {
         this.openDialog();
       } else {
