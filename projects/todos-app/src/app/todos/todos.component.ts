@@ -120,7 +120,7 @@ export class TodosComponent {
         this.todos.set(this.transformData(data));
       },
       error: (error) => {
-        console.error('Error loading todos', error);
+        console.error('Error loading todos');
       },
     });
   }
@@ -139,7 +139,7 @@ export class TodosComponent {
         this.loadTodos();
       },
       error: (error) => {
-        console.error('Error creating todo', error);
+        console.error('Error creating todo');
       },
     });
 
@@ -161,7 +161,7 @@ export class TodosComponent {
         this.loadTodos();
       },
       error: (error) => {
-        console.error('Error updating todo', error);
+        console.error('Error updating todo');
       },
     });
 
@@ -218,7 +218,7 @@ export class TodosComponent {
           this.loadTodos();
         },
         error: (error) => {
-          console.error('Error updating todo', error);
+          console.error('Error toggling todo');
         },
       });
   };
@@ -237,7 +237,7 @@ export class TodosComponent {
           this.loadTodos();
         },
         error: (error) => {
-          console.error('Error deleting todo', error);
+          console.error('Error deleting todo');
         },
       });
     });
