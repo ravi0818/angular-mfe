@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -18,7 +24,7 @@ export class CustomDialogComponent {
   readonly dialogData = inject(MAT_DIALOG_DATA);
 
   title = signal(this.dialogData.title);
-  body = signal(this.dialogData.body);
+  body = signal<TemplateRef<any>>(this.dialogData.body);
   data = signal(this.dialogData.data);
   showHeader = signal(this.dialogData.showHeader);
   showFooter = signal(this.dialogData.showFooter);
