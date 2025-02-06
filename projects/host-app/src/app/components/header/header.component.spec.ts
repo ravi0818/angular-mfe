@@ -87,8 +87,6 @@ describe('HeaderComponent', () => {
 
     fixture.detectChanges();
 
-    console.log(component.isMenuOpen());
-
     expect(component.toggleMenu).toHaveBeenCalled();
     expect(component.isMenuOpen()).toBe(!initialState);
   });
