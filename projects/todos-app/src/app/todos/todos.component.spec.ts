@@ -356,4 +356,93 @@ describe('TodosComponent', () => {
 
     expect(component.isMobileView()).not.toBeTrue();
   });
+
+  it('should open add todo dialog and check input fields', async () => {
+    let dialogContainer = overlayContainerElement.querySelector(
+      'mat-dialog-container'
+    );
+
+    expect(dialogContainer).toBeNull();
+
+    component.openAddDialog();
+    fixture.detectChanges();
+
+    let dialogContainer2 = overlayContainerElement.querySelector(
+      'mat-dialog-container'
+    );
+
+    expect(dialogContainer2).not.toBeNull();
+
+    const inputs = overlayContainerElement.querySelectorAll(
+      'mat-dialog-container input, mat-dialog-container textarea'
+    );
+
+    expect(inputs.length).toBe(3);
+
+    const inputValues = ['Test Title', 'Test Description', '12/31/2025'];
+    inputs.forEach((input, index) => {
+      const element = input as HTMLInputElement | HTMLTextAreaElement;
+      element.value = inputValues[index];
+      element.dispatchEvent(new Event('input'));
+    });
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const addButton = Array.from(
+      overlayContainerElement.querySelectorAll('button')
+    ).find((btn) => btn.textContent?.trim() === 'Add') as HTMLButtonElement;
+
+    expect(addButton.disabled).toBeFalse();
+    expect(component.title.value).toBe('Test Title');
+    expect(component.description.value).toBe('Test Description');
+    const expectedDate = new Date('2025-12-31');
+    expect(new Date(component.dueDate.value ?? '').toISOString()).toBe(
+      expectedDate.toISOString()
+    );
+    expect(component.validateForm()).toBeTrue();
+  });
+
+  it('should open add todo dialog and check input error messages', async () => {
+    let dialogContainer = overlayContainerElement.querySelector(
+      'mat-dialog-container'
+    );
+
+    expect(dialogContainer).toBeNull();
+
+    component.openAddDialog();
+    fixture.detectChanges();
+
+    let dialogContainer2 = overlayContainerElement.querySelector(
+      'mat-dialog-container'
+    );
+
+    expect(dialogContainer2).not.toBeNull();
+
+    const inputs = overlayContainerElement.querySelectorAll(
+      'mat-dialog-container input, mat-dialog-container textarea'
+    );
+
+    expect(inputs.length).toBe(3);
+
+    const inputValues = ['', '', ''];
+    inputs.forEach((input, index) => {
+      const element = input as HTMLInputElement | HTMLTextAreaElement;
+      element.value = inputValues[index];
+      element.dispatchEvent(new Event('input'));
+    });
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const addButton = Array.from(
+      overlayContainerElement.querySelectorAll('button')
+    ).find((btn) => btn.textContent?.trim() === 'Add') as HTMLButtonElement;
+
+    expect(addButton.disabled).toBeTrue();
+    expect(component.title.errors).not.toBeNull();
+    expect(component.description.errors).not.toBeNull();
+    expect(component.dueDate.errors).not.toBeNull();
+    expect(component.validateForm()).not.toBeTrue();
+  });
 });
