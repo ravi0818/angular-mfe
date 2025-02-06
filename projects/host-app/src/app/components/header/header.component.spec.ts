@@ -5,7 +5,7 @@ import { setupTestBed } from '../../test-setup';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AsyncPipe } from '@angular/common';
 
@@ -91,23 +91,37 @@ describe('HeaderComponent', () => {
     expect(component.isMenuOpen()).toBe(!initialState);
   });
 
-  // it('should navigate to todos on Todos click', () => {
-  //   // spyOn(component, 'toggleMenu').and.callThrough();
-  //   const todosLink = fixture.debugElement.query(
-  //     By.css('a[routerLink="/todos"]')
-  //   ).nativeElement;
+  it('should navigate to todos on Todos click', async () => {
+    spyOn(component.isMenuOpen, 'set');
+    spyOn(component.currentRoute, 'set');
+    const todosLink = fixture.debugElement.query(
+      By.css('a[routerLink="/todos"]')
+    ).nativeElement;
 
-  //   const currentRoute = component.currentRoute();
+    todosLink.click();
 
-  //   console.log(todosLink);
+    await fixture.whenStable();
 
-  //   todosLink.click();
+    fixture.detectChanges();
 
-  //   fixture.detectChanges();
+    expect(component.isMenuOpen.set).toHaveBeenCalledWith(false);
+    expect(component.currentRoute.set).toHaveBeenCalledWith('/todos');
+  });
 
-  //   console.log(component.currentRoute());
+  it('should navigate to shopping on Shopping click', async () => {
+    spyOn(component.isMenuOpen, 'set');
+    spyOn(component.currentRoute, 'set');
+    const shoppingLink = fixture.debugElement.query(
+      By.css('a[routerLink="/shopping"]')
+    ).nativeElement;
 
-  //   // expect(component.toggleMenu).toHaveBeenCalled();
-  //   expect(component.currentRoute()).not.toBe(currentRoute);
-  // });
+    shoppingLink.click();
+
+    await fixture.whenStable();
+
+    fixture.detectChanges();
+
+    expect(component.isMenuOpen.set).toHaveBeenCalledWith(false);
+    expect(component.currentRoute.set).toHaveBeenCalledWith('/shopping');
+  });
 });
