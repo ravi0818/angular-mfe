@@ -19,7 +19,9 @@
           "options": {
             "outputPath": "dist/host-app",
             "index": "projects/host-app/src/index.html",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/host-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -93,7 +95,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/host-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -127,7 +132,9 @@
           "options": {
             "outputPath": "dist/todos-app",
             "index": "projects/todos-app/src/index.html",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/todos-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -195,7 +202,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/todos-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -238,7 +248,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/common/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
@@ -259,7 +272,9 @@
           "options": {
             "outputPath": "dist/shopping-app",
             "index": "projects/shopping-app/src/index.html",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/shopping-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -327,7 +342,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/shopping-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -347,6 +365,9 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }
