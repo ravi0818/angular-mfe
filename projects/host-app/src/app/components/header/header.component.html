@@ -1,7 +1,10 @@
 <nav class="bg-gray-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+      <div
+        class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+        [class]="isLoggedIn() ? 'block' : 'hidden'"
+      >
         <button class="p-2" [attr.aria-label]="isMenuOpen() ? 'close' : 'menu'">
           <mat-icon
             class="text-white"
@@ -22,7 +25,10 @@
           </h3>
         </div>
         <div class="hidden sm:ml-6 sm:block w-full">
-          <div class="flex space-x-4 w-full justify-end">
+          <div
+            class="flex space-x-4 w-full justify-end"
+            [class]="isLoggedIn() ? 'block' : 'hidden'"
+          >
             <a
               routerLink="/"
               class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
@@ -53,17 +59,6 @@
               "
               >Shopping</a
             >
-            <!-- <a
-              routerLink="/games"
-              class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
-              [class]="
-                currentRoute() === '/games'
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-              "
-              >Games</a
-            >-->
-            <!-- routerLink="/cart" -->
             <a
               class="rounded-md px-3 py-2 text-sm font-medium flex items-center"
               [class]="
@@ -83,7 +78,10 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" [class]="isMenuOpen() ? 'block' : 'hidden'">
+  <div
+    class="sm:hidden"
+    [class]="isMenuOpen() && isLoggedIn() ? 'block' : 'hidden'"
+  >
     <div class="space-y-1 px-2 pb-3 pt-2">
       <a
         routerLink="/"
@@ -115,19 +113,8 @@
         "
         >Shopping</a
       >
-      <!-- <a
-        routerLink="/games"
-        class="block rounded-md px-3 py-2 text-base font-medium"
-        [class]="
-          currentRoute() === '/games'
-            ? 'bg-gray-900 text-white'
-            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-        "
-        >Games</a
-      >-->
-      <!-- routerLink="/cart" -->
       <a
-        class="block rounded-md px-3 py-2 text-base font-medium"
+        class="block rounded-md px-3 py-2 text-base font-medium relative"
         [class]="
           currentRoute() === '/cart'
             ? 'bg-gray-900 text-white'

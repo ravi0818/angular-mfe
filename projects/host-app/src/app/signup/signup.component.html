@@ -1,0 +1,98 @@
+<div class="flex justify-center items-center h-full">
+  <mat-card class="p-8">
+    <form [formGroup]="signupForm" class="flex flex-col w-[24rem]">
+      <h3 class="text-xl pb-8 font-bold text-center">Create an Account</h3>
+
+      <mat-form-field>
+        <mat-label>Enter your name</mat-label>
+        <input
+          matInput
+          placeholder="John Doe"
+          formControlName="name"
+          required
+        />
+        @if ( signupForm.get('name')?.errors?.['required']) {
+        <mat-error>{{ errorMessages.name.required }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          formControlName="email"
+          required
+        />
+        @if ( signupForm.get('email')?.errors?.['required']) {
+        <mat-error>{{ errorMessages.email.required }}</mat-error>
+        }@else if(signupForm.get('email')?.errors?.['email']) {
+        <mat-error>{{ errorMessages.email.email }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Create a password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="togglePasswordVisibility()"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+          class="px-2"
+          type="button"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        @if ( signupForm.get('password')?.errors?.['required']) {
+        <mat-error>{{ errorMessages.password.required }}</mat-error>
+        }@else if (signupForm.get('password')?.errors?.['minlength']) {
+        <mat-error>{{ errorMessages.password.minlength }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="confirmPassword"
+        />
+        @if ( signupForm.get('confirmPassword')?.errors?.['required']) {
+        <mat-error>{{ errorMessages.confirmPassword.required }}</mat-error>
+        }
+      </mat-form-field>
+      @if (signupForm.errors?.['passwordMismatch']) {
+      <mat-error>{{
+        errorMessages.confirmPassword.passwordMismatch
+      }}</mat-error>
+      }
+
+      <button
+        mat-flat-button
+        (click)="handleSignup()"
+        [disabled]="signupForm.invalid"
+        class="my-2"
+      >
+        Sign Up
+      </button>
+
+      <div class="py-4 text-center">
+        <hr class="my-4" />
+        <p>
+          Already have an account?
+          <a class="text-blue-500 hover:text-blue-900" routerLink="/login"
+            >Login</a
+          >
+        </p>
+      </div>
+    </form>
+  </mat-card>
+</div>

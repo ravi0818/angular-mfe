@@ -1,0 +1,65 @@
+<div class="flex justify-center items-center h-full">
+  <mat-card class="p-8">
+    <form [formGroup]="loginForm" class="flex flex-col w-[24rem]">
+      <h3 class="text-xl pb-8 font-bold text-center">
+        Welcome Back!<br />
+        Login to your account
+      </h3>
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          formControlName="email"
+          required
+        />
+        @if (loginForm.get('email')?.errors?.['required']) {
+        <mat-error>{{ errorMessages.email.required }}</mat-error>
+        }@else if(loginForm.get('email')?.errors?.['email']){
+        <mat-error>{{ errorMessages.email.email }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hide() ? 'password' : 'text'"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+          class="px-2"
+          type="button"
+        >
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        @if(loginForm.get('password')?.errors?.['required']){
+        <mat-error>{{ errorMessages.password.required }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        (click)="handleLogin()"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+
+      <div class="py-4 text-center">
+        <hr class="my-4" />
+        <p>
+          Don't have an account?
+          <a class="text-blue-500 hover:text-blue-900" routerLink="/signup"
+            >Sign up</a
+          >
+        </p>
+      </div>
+    </form>
+  </mat-card>
+</div>

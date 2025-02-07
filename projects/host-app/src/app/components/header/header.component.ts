@@ -5,7 +5,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { map, Observable, Subscription } from 'rxjs';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
-import { getCartValue, IProduct } from 'common';
+import { getCartValue, IProduct, selectIsLoggedIn } from 'common';
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 // import { ProductsService } from '@services/products.service';
@@ -30,6 +30,7 @@ export class HeaderComponent {
   cartCount$: Observable<number>;
   currentRoute = signal(this.router.url);
   isMenuOpen = signal(false);
+  isLoggedIn = signal(false);
 
   constructor() {
     this.cart$ = this.store.select(getCartValue);
@@ -42,6 +43,10 @@ export class HeaderComponent {
         this.isMenuOpen.set(false);
         this.currentRoute.set(this.router.url);
       }
+    });
+
+    this.store.select(selectIsLoggedIn).subscribe((isLoggedIn) => {
+      this.isLoggedIn.set(isLoggedIn);
     });
   }
 
