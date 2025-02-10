@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITodo } from '../interface/todo';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  private apiUrl =
-    'http://ec2-3-7-46-232.ap-south-1.compute.amazonaws.com:5000/api/todos';
+  private apiUrl = `${environment.backendUrl}/api/todos`;
 
   constructor(private http: HttpClient) {}
 
