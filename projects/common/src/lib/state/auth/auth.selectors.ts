@@ -17,3 +17,8 @@ export const selectEmail = createSelector(
   selectAuth,
   (state: AuthState) => state.email
 );
+
+export const selectName = createSelector(
+  selectAuth,
+  (state: AuthState) => state.name
+);

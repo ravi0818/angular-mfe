@@ -6,12 +6,14 @@ export const authFeatureKey = 'auth';
 export interface AuthState {
   isLoggedIn: boolean;
   email: string;
+  name: string;
   token: string;
 }
 
 export const initialAuthState: AuthState = {
   isLoggedIn: false,
   email: '',
+  name: '',
   token: '',
 };
 
@@ -22,6 +24,7 @@ export const authReducer = createReducer(
       ...state,
       isLoggedIn: true,
       token: action.token,
+      name: action.name,
       username: action.email,
     };
   }),
