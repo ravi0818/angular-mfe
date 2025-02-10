@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ConfirmPasswordValidator } from '../custom-validators';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -34,6 +35,7 @@ import { ConfirmPasswordValidator } from '../custom-validators';
 export class SignupComponent {
   store = inject(Store);
   router = inject(Router);
+  authService = inject(AuthService);
 
   hidePassword = true;
 
@@ -83,6 +85,20 @@ export class SignupComponent {
     //   })
     // );
 
-    this.router.navigate(['/']);
+    this.authService
+      .signup(
+        this.signupForm.value.name || '',
+        this.signupForm.value.email || '',
+        this.signupForm.value.password || ''
+      )
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

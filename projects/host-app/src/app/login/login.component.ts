@@ -16,6 +16,8 @@ import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthActions, selectIsLoggedIn } from 'common';
 import { firstValueFrom } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +37,7 @@ import { firstValueFrom } from 'rxjs';
 export class LoginComponent {
   store = inject(Store);
   router = inject(Router);
+  authService = inject(AuthService);
 
   readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -73,13 +76,28 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    this.store.dispatch(
-      AuthActions.loginSuccess({
-        email: this.loginForm.value.email || '',
-        token: this.loginForm.value.password || '',
-      })
-    );
+    if (this.loginForm.invalid) return;
 
-    this.router.navigate(['/']);
+    this.authService
+      .login(
+        this.loginForm.value.email || '',
+        this.loginForm.value.password || ''
+      )
+      .subscribe({
+        next: (res: any) => {
+          const userData = jwtDecode(res.accessToken) as any;
+          this.store.dispatch(
+            AuthActions.loginSuccess({
+              email: userData.email || '',
+              name: userData.name || '',
+              token: res.accessToken || '',
+            })
+          );
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }
