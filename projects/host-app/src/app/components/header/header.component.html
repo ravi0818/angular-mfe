@@ -81,9 +81,10 @@
           </div>
         </div>
       </div>
-      <div class="sm:hidden">
+      <div class="sm:hidden absolute inset-y-0 right-0 flex items-center">
         <a
           class="rounded-md px-3 py-2 text-sm font-medium flex items-center text-gray-300 hover:bg-gray-700 hover:text-white"
+          [class]="isLoggedIn() ? 'block' : 'hidden'"
           (click)="handleLogout()"
         >
           <mat-icon fontIcon="logout"></mat-icon>
