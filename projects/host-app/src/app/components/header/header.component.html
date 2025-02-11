@@ -71,8 +71,23 @@
             >
               <mat-icon fontIcon="shopping_cart"></mat-icon>
             </a>
+
+            <a
+              class="rounded-md px-3 py-2 text-sm font-medium flex items-center text-gray-300 hover:bg-gray-700 hover:text-white"
+              (click)="handleLogout()"
+            >
+              <mat-icon fontIcon="logout"></mat-icon>
+            </a>
           </div>
         </div>
+      </div>
+      <div class="sm:hidden">
+        <a
+          class="rounded-md px-3 py-2 text-sm font-medium flex items-center text-gray-300 hover:bg-gray-700 hover:text-white"
+          (click)="handleLogout()"
+        >
+          <mat-icon fontIcon="logout"></mat-icon>
+        </a>
       </div>
     </div>
   </div>
