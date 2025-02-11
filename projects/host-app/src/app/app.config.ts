@@ -8,6 +8,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideStore } from '@ngrx/store';
 import { authReducer, cartReducer } from 'common';
 import { authInterceptor } from './interceptors/authInterceptor';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideNativeDateAdapter(),
-    provideStore({ cart: cartReducer, auth: authReducer }),
+    provideStore({ cart: cartReducer, auth: authReducer }), provideClientHydration(withEventReplay()),
   ],
 };
